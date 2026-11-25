@@ -1,0 +1,2 @@
+# Boards without a USB-UART chip: primary console (printf + stdin) on native USB-Serial-JTAG
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y

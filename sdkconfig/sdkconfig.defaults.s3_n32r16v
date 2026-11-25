@@ -1,0 +1,7 @@
+# ESP32-S3-WROOM-2-N32R16V: 32 MB OCTAL flash (1.8 V) + 16 MB octal PSRAM
+# Note: by default only the first 16 MB of flash can be cache-mapped (code/rodata/mmap);
+# see CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_OCTAL_FLASH (experimental) to use the upper 16 MB.
+CONFIG_ESPTOOLPY_FLASHSIZE_32MB=y
+CONFIG_ESPTOOLPY_OCT_FLASH=y
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_MODE_OCT=y
