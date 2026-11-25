@@ -27,10 +27,8 @@ Host is Windows; `pio` is not on PATH.
   - `extra_configs = boards/boards.ini`
   - `[boards] dir = boards`
   - an `[env]` with `framework` (`espidf` or `arduino`) and `build_flags` (may be empty). Module envs append `${env.build_flags}`.
-- ESP-IDF projects also need:
-  - their own `sdkconfig.defaults` in the project root (may be empty). It is listed **last** in `SDKCONFIG_DEFAULTS`, so app settings override board settings.
-  - `src/CMakeLists.txt` that globs `${BOARDS_DIR}/src/*.c` as well. `BOARDS_DIR` is passed via `cmake_extra_args`.
-- Arduino projects compile `boards/src/` through `build_src_filter` (set in `[boards_base]`).
+- ESP-IDF projects also need their own `sdkconfig.defaults` in the project root (may be empty). It is listed **last** in `SDKCONFIG_DEFAULTS`, so app settings override board settings.
+- Both frameworks compile `boards/src/` through `build_src_filter` (set in `[boards_base]`), with the project's build flags. **Don't** also add the board sources in an ESP-IDF project's `src/CMakeLists.txt`: they would be compiled twice and fail to link with "multiple definition".
 - `boards.ini` defines **no** `[env]` or `[platformio]` section, so it never overrides the project's own.
 - `build_flags` that one hardware type adds for one framework (`-DBOARD_HAS_PSRAM`, `-DARDUINO_USB_CDC_ON_BOOT=1`) are harmless under the other.
 - `board_build.arduino.memory_type` only affects Arduino builds; `cmake_extra_args` only ESP-IDF builds.

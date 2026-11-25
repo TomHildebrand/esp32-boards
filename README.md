@@ -49,16 +49,9 @@ build_flags =                ; app-wide flags, added for every module
 lib_deps =                   ; app libraries
 ```
 
-For **ESP-IDF** projects, two more pieces are needed:
-- Add a `sdkconfig.defaults` in the project root for app settings. It may be empty. It is applied after the board defaults.
-- Compile the board sources in `src/CMakeLists.txt`:
+**ESP-IDF** projects also need a `sdkconfig.defaults` in the project root for app settings. It may be empty, and it is applied after the board defaults.
 
-  ```cmake
-  FILE(GLOB_RECURSE app_sources ${CMAKE_SOURCE_DIR}/src/*.* ${CMAKE_SOURCE_DIR}/${BOARDS_DIR}/src/*.c)
-  idf_component_register(SRCS ${app_sources})
-  ```
-
-Arduino projects need nothing more. In the code, `#include "board.h"` and use its macros instead of hard-coded pin numbers.
+The board sources (`boards/src/`) are compiled automatically for both frameworks. In the code, `#include "board.h"` and use its macros instead of hard-coded pin numbers.
 
 After cloning a project, run `git submodule update --init`. To pick up board changes later, run `git submodule update --remote boards` and commit the result.
 
