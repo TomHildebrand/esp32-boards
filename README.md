@@ -20,7 +20,7 @@ It works with both frameworks of the `espressif32` platform:
 
 | Environment | Board | Flash / PSRAM | User LED |
 |---|---|---|---|
-| `m12_doit_esp32` | ESP32 DEVKIT V1 38-pin clone (WROOM-32U, external antenna) | 4 MB / – | none |
+| `m12_doit_esp32`, `m13_doit_esp32` | ESP32 DEVKIT V1 38-pin clone (WROOM-32U, external antenna); 13 is a deployed production unit | 4 MB / – | none |
 | `m14_esp32s3` … `m16_esp32s3` | ESP32-S3-DevKitC-1 N16R8 44-pin clone (on-board antenna) | 16 MB quad / 8 MB | WS2812, GPIO48 |
 | `m17_esp32s3`, `m18_esp32s3` | ESP32-S3-DevKitC-1U N16R8 44-pin clone (external antenna) | 16 MB quad / 8 MB | WS2812, GPIO48 |
 | `m19_esp32s3` | Espressif ESP32-S3-DevKitC-1 N32R16V (genuine) | 32 MB octal / 16 MB | WS2812, GPIO38 |

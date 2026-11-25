@@ -38,6 +38,7 @@ Host is Windows; `pio` is not on PATH.
 | Env | Module | Board | Memory (verified with esptool) | User LED | UART port (flash + console) | Native USB port (debug/JTAG) |
 |---|---|---|---|---|---|---|
 | `m12_doit_esp32` | 12 | ESP32 DEVKIT V1 **38-pin** clone, WROOM-**32U**, **external antenna** (U.FL) | ESP32-D0WD-V3, 4 MB flash, no PSRAM | **none** (verified; red power LED only) | COM4 (CP2102) | – |
+| `m13_doit_esp32` | 13 | Same as Module 12. **Production unit** (Oliver Water Meter Controller), deployed at Oliver; updated over the air | same as 12 (not verified with esptool) | none | – (not on this PC) | – |
 | `m14_esp32s3` | 14 | ESP32-S3-DevKitC-1 N16R8 **44-pin** clone, on-board antenna | 16 MB quad 3.3 V + 8 MB PSRAM | WS2812 GPIO48 (verified) | COM10 | COM5 |
 | `m15_esp32s3` | 15 | ESP32-S3-DevKitC-1 N16R8 44-pin clone, on-board antenna | same | WS2812 GPIO48 (verified) | COM7 | COM6 |
 | `m16_esp32s3` | 16 | ESP32-S3-DevKitC-1 N16R8 44-pin clone, on-board antenna | same | WS2812 GPIO48 (verified) | COM9 | COM8 |
