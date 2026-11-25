@@ -23,7 +23,7 @@ It works with both frameworks of the `espressif32` platform:
 | `m12_doit_esp32` | ESP32 DEVKIT V1 38-pin clone (WROOM-32U, external antenna) | 4 MB / – | none |
 | `m14_esp32s3` … `m16_esp32s3` | ESP32-S3-DevKitC-1 N16R8 44-pin clone (on-board antenna) | 16 MB quad / 8 MB | WS2812, GPIO48 |
 | `m17_esp32s3`, `m18_esp32s3` | ESP32-S3-DevKitC-1U N16R8 44-pin clone (external antenna) | 16 MB quad / 8 MB | WS2812, GPIO48 |
-| `m19_esp32s3` | Espressif ESP32-S3-DevKitC-1 N32R16V (genuine), used via native USB | 32 MB octal / 16 MB | WS2812, GPIO38 |
+| `m19_esp32s3` | Espressif ESP32-S3-DevKitC-1 N32R16V (genuine) | 32 MB octal / 16 MB | WS2812, GPIO38 |
 | `m20_lilygo_sim7080g` | LILYGO T-SIM7080G-S3 Standard (no PMU), SIM7080G modem | 16 MB quad / 8 MB | none |
 
 ## Using it in a project
