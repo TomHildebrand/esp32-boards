@@ -1,0 +1,80 @@
+# <PROJECT NAME>
+
+<!--
+  CLAUDE.md template for a project that uses the esp32-boards layer (a ported legacy Arduino
+  project or a new one). Copy it to the project root as CLAUDE.md, fill in every <...>, and delete
+  the sections that don't apply. This file gives Claude Code the project context at the start of
+  every session; without it, a session knows nothing about the board layer or the safety rules.
+  Delete this comment when done.
+-->
+
+<One paragraph: what the device does, what it connects to (sensors, outputs, cloud services).>
+
+<Arduino framework (core 2.0.17) | ESP-IDF 6.0.1>, PlatformIO (`espressif32` platform).
+Host is Windows; `pio` is not on PATH.
+
+## SAFETY: production vs. test
+
+<!-- Delete this section if the project has no deployed unit. -->
+- **Module <NN> (`m<NN>_...`) is the deployed PRODUCTION unit. Never flash or upload it.**
+  - All code work and testing happens on lab boards (Module <NN>, ...).
+  - Building it is fine. The user updates production themselves (<OTA page / by hand>).
+- `boards/boards.ini` blocks PlatformIO uploads to that module (`upload_protocol = custom` with a failing `upload_command`). Never remove or bypass this.
+- Never put a production build (production settings) on a lab board.
+
+## Secrets and test settings
+
+<!-- Delete this section if the project has no secrets. -->
+| File | Purpose | Git |
+|---|---|---|
+| `src/<Secrets>.h` | Production credentials and settings | **ignored, never commit** |
+| `src/<Secrets>_test.h` | Test overrides (lab WiFi, test IDs, device name) | **ignored, never commit** |
+| `src/*.template` | Placeholder copies of the above | committed |
+
+- Never print or quote values from the secrets files. Show define names only.
+- <How the test overrides are selected, e.g. `#if BOARD_MODULE_ID != <NN>` → include the test file.>
+
+## Board layer: `boards/` submodule
+
+The hardware types, the module inventory (COM ports) and the pin/capability macros come from the shared repo **`TomHildebrand/esp32-boards`**, a git submodule at `boards/`.
+
+- **Read [boards/CLAUDE.md](boards/CLAUDE.md)** for the module table, COM ports and hardware gotchas.
+- Don't edit files under `boards/` here. Make the change in the esp32-boards repo, push it, then run `git submodule update --remote boards` here and commit the new pointer.
+- After cloning: `git submodule update --init`.
+
+What belongs to this app:
+
+| Path | Purpose |
+|---|---|
+| `platformio.ini` | `extra_configs = boards/boards.ini`, `[boards] dir = boards`, `default_envs`, `[env]` with `framework`, app `build_flags`, `lib_deps`; `build_dir` outside OneDrive |
+| `src/app_pins.h` | Wiring of external parts per hardware type. Includes `board.h`. Unknown board → `#error`. |
+| `src/main.cpp` | The application |
+| <`data/`> | <SPIFFS/LittleFS files, uploaded with `-t uploadfs`> |
+
+- Use the `board.h` and `app_pins.h` macros, never hard-coded GPIO numbers.
+- Supported hardware: <which hardware types fit, and why others don't (PCB socket, pins, PSRAM, flash)>.
+
+## Commands
+
+```sh
+PIO=~/.platformio/penv/Scripts/pio.exe
+$PIO run -e m<NN>_...                # build
+$PIO run -e m<NN>_... -t upload      # flash firmware
+$PIO run -e m<NN>_... -t uploadfs    # flash the filesystem (if data/ exists)
+$PIO device monitor -p COM<x> -b 115200
+```
+
+- Run `upload` and `uploadfs` as **separate** pio runs. Combined, only the filesystem got written.
+- Build output goes to `C:/pio-build/<project>`, outside OneDrive.
+- <Library pinning policy, e.g. "versions pinned to the deployed build; don't bump them as a side effect".>
+- <Expected healthy boot log.>
+
+## Status and plan
+
+- **Phase 1:** port to the esp32-boards layer only, keeping the existing framework/core version. <branch, tested modules>
+- **Later phase:** clean-up, refactoring and linting, possibly together with a move to Arduino core 3.x.
+
+## Repo
+
+GitHub: `TomHildebrand/<repo>`, branch `<branch>`.
+Commits and pushes only with the user's explicit approval.

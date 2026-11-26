@@ -15,6 +15,7 @@ It works with both frameworks of the `espressif32` platform:
 | `include/board_led.h`, `src/board_led.c` | On-board LED driver (plain LED, WS2812 RGB, or none) |
 | `sdkconfig/` | ESP-IDF defaults per hardware type |
 | `examples/arduino-blink/` | Minimal Arduino project using this layer |
+| `templates/CLAUDE.md.template` | Starting point for each project's `CLAUDE.md` (Claude Code context) |
 
 ## Modules
 
@@ -79,6 +80,13 @@ After cloning a project, run `git submodule update --init`. To pick up board cha
    #endif
    ```
 4. Build for each module you intend to use (`pio run -e mNN_...`).
+5. Add a `CLAUDE.md` to the project root, made from [templates/CLAUDE.md.template](templates/CLAUDE.md.template). Fill in:
+   - production vs. test modules
+   - which files hold secrets
+   - the supported hardware
+   - the commands
+
+   Claude Code reads this file at the start of every session in that folder. Without it, a session knows nothing about the board layer or the safety rules. This applies to new projects too.
 
 ## Adding boards
 

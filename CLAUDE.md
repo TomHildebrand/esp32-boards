@@ -20,6 +20,7 @@ Host is Windows; `pio` is not on PATH.
 | `include/board_led.h`, `src/board_led.c` | On-board LED driver: ESP-IDF RMT or Arduino `neopixelWrite()`/`digitalWrite()`, chosen by `#ifdef ARDUINO`. |
 | `sdkconfig/sdkconfig.defaults.<variant>` | ESP-IDF settings per hardware type (flash size/mode, PSRAM, USB console). Ignored by Arduino builds. |
 | `examples/arduino-blink/` | Arduino LED test using this layer. Its `[boards] dir = ../..` points at the repo root. |
+| `templates/CLAUDE.md.template` | Template for a project's own `CLAUDE.md`. Every ported or new project gets one (README porting step 5). |
 
 ## How a project uses it
 
